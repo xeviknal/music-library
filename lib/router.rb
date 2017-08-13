@@ -7,7 +7,11 @@ class Router
   METHODS = [GET, POST, DELETE]
 
   def initialize
-    self.routes = Hash.new([])
+    empty_routes
+  end
+
+  def config &block
+    instance_eval &block
   end
 
   METHODS.each do |method|
@@ -16,5 +20,12 @@ class Router
 
       self.routes[method] << [path, options ||= {}]
     end
+  end
+
+  private
+
+  def empty_routes
+    self.routes = Hash.new
+    METHODS.each { |method| self.routes[method] = [] }
   end
 end

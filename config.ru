@@ -1,4 +1,8 @@
 require 'rack'
 require_relative 'config/environment'
 
-Rack::Handler::WEBrick.run MusicLibrary::Application.new, Port: 8000
+MusicLibraryApp = MusicLibrary::Application.new
+
+require_relative 'config/routes'
+
+Rack::Handler::WEBrick.run MusicLibraryApp, Port: 8000
