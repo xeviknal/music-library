@@ -10,9 +10,11 @@ class Router
     self.routes = Hash.new([])
   end
 
-  def get(path, options = {})
-    raise ArgumentError if path.nil? || path.empty?
+  METHODS.each do |method|
+    define_method(method) do |path, options|
+      raise ArgumentError if path.nil? || path.empty?
 
-    self.routes[GET] << [path, options]
+      self.routes[method] << [path, options ||= {}]
+    end
   end
 end
