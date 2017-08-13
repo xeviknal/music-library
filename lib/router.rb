@@ -1,3 +1,5 @@
+require_relative('route')
+
 class Router
   attr_accessor :routes
 
@@ -12,6 +14,15 @@ class Router
 
   def draw &block
     instance_eval &block
+  end
+
+  def route_for(request)
+    route = routes.detect do |method, routes|
+      method.to_sym == request.method &&
+        routes.find { |path, _| path == request.path }
+    end
+
+    Route.new(*route.last.last) if route
   end
 
   METHODS.each do |method|

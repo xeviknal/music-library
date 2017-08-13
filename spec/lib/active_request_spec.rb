@@ -41,4 +41,12 @@ describe ActiveRequest do
       end
     end
   end
+
+  describe '.path' do
+    subject { request.path }
+
+    let(:environment) { { "PATH_INFO": '/an/example/path' } }
+
+    it { is_expected.to eq '/an/example/path' }
+  end
 end

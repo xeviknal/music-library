@@ -21,6 +21,10 @@ class ActiveRequest
     @method ||= env['REQUEST_METHOD'].downcase.to_sym
   end
 
+  def path
+    @path ||= env['PATH_INFO']
+  end
+
   private
 
   def has_params?
