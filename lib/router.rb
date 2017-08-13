@@ -10,7 +10,7 @@ class Router
     empty_routes
   end
 
-  def config &block
+  def draw &block
     instance_eval &block
   end
 
