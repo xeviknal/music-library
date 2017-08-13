@@ -18,7 +18,6 @@ describe Router do
 
       context 'when both path and options are present' do
         it 'register new get route' do
-          expect(router.routes).to be_empty
           subject
           expect(router.routes[method.to_sym].first).to eq [path, options]
         end
