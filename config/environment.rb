@@ -2,6 +2,8 @@ require 'pry'
 require 'active_support'
 require 'active_record'
 
+Dir['./lib/**/*.rb'].each { |f| require f }
+
 module MusicLibrary
   class Application
     def call(env)
