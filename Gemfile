@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'webrick'
 gem 'activerecord'
-gem 'actionpack'
+gem 'activesupport'
 
 group :development, :test do
   gem 'pry-byebug'

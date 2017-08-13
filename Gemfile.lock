@@ -80,6 +80,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack
   activerecord
+  activesupport
   pry-byebug
   rspec
   webrick
