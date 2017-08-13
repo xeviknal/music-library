@@ -17,6 +17,10 @@ class ActiveRequest
     end
   end
 
+  def method
+    @method ||= env['REQUEST_METHOD'].downcase.to_sym
+  end
+
   private
 
   def has_params?

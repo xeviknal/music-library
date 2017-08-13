@@ -29,4 +29,16 @@ describe ActiveRequest do
       end
     end
   end
+
+  describe '.method' do
+    subject { request.method }
+
+    %w{GET POST PUT DELETE PATCH}.each do |method|
+      context "when request is held via #{method}" do
+        let(:environment) { { 'REQUEST_METHOD': method } }
+
+        it { is_expected.to eq method.downcase.to_sym }
+      end
+    end
+  end
 end
