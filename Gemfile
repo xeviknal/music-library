@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'webrick'
 gem 'activerecord'
 gem 'activesupport'
 
