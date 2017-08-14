@@ -12,6 +12,10 @@ class Route
     Object.const_get "#{controller_name.capitalize}Controller"
   end
 
+  def action
+    to.last.to_sym
+  end
+
   private
 
   def controller_name

@@ -19,4 +19,10 @@ describe Route do
       it { expect { subject }.to raise_error(LoadError) }
     end
   end
+
+  describe :action do
+    subject { route.action }
+
+    it { is_expected.to eq :index }
+  end
 end
