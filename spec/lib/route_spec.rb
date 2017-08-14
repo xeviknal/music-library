@@ -10,6 +10,13 @@ describe Route do
   describe :controller do
     subject { route.controller }
 
-    it { is_expected.to eq(AlbumsController) }
+    context 'when controller exists' do
+      it { is_expected.to eq(AlbumsController) }
+    end
+
+    context 'when controller doesn\'t exists' do
+      let(:route) { Route.new('/path', { to: 'unknown#index' }) }
+      it { expect { subject }.to raise_error(LoadError) }
+    end
   end
 end

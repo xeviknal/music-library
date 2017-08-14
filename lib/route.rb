@@ -23,7 +23,6 @@ class Route
   end
 
   def require_controller
-    binding.pry
     require File.join(File.dirname(__FILE__), '..', 'app',
                       'controllers', controller_name.downcase + '_controller.rb')
   end
