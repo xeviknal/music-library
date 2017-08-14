@@ -1,0 +1,2 @@
+class AlbumsController
+end

@@ -9,12 +9,6 @@ describe MusicLibrary::Application do
   describe :call do
     subject { application.call([]) }
 
-    before do
-      # Expect to call Router
-      # Expect to initialize controller with request
-      # Expect controller to be called
-    end
-
     describe 'response' do
       it 'is an array of three items' do
         expect(subject.size).to eq 3

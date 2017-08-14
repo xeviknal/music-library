@@ -13,9 +13,11 @@ module MusicLibrary
     end
 
     def call(env)
-      # Gimme Controller/action out of Request path
-      # initialize controller with request
-      # call controller action
+      request     = ActiveRequest.new(env)
+      route       = self.router.route_for(request)
+      #controller  = route.controller.new(request)
+      #response    = controller.send(route.action)
+      #response.to_rack
        ['200', {'Content-Type' => 'application/json'}, ['A barebones rack app.']]
     end
   end

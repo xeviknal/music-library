@@ -28,7 +28,7 @@ class ActiveRequest
   private
 
   def has_params?
-    !query_string.empty?
+    !query_string.nil? && !query_string.empty?
   end
 
   def query_string
