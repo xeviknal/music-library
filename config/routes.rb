@@ -1,4 +1,4 @@
 MusicLibraryApp.router.draw do
-  get '/', to: 'home#index'
+  get '/', to: 'albums#index'
   post '/albums', to: 'albums#create'
 end

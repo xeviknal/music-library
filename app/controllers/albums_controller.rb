@@ -1,2 +1,4 @@
-class AlbumsController
+class AlbumsController < BaseController
+  def index
+  end
 end
