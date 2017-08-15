@@ -14,15 +14,14 @@ module MusicLibrary
 
     def call(env)
       request     = ActiveRequest.new(env)
-      route       = self.router.route_for(request)
+      route       = router.route_for(request)
 
       if route
         controller  = route.controller.new(request)
-        response    = controller.send(route.action)
-        #response.to_rack
-      end
-
-      ['200', {'Content-Type' => 'application/json'}, ['A barebones rack app.']]
+        controller.send(route.action)
+      else
+        Response.not_found
+      end.to_rack
     end
   end
 end

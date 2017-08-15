@@ -7,26 +7,43 @@ describe MusicLibrary::Application do
   it { is_expected.to respond_to(:call).with(1).argument }
 
   describe :call do
-    subject { application.call([]) }
+    subject { application.call({}) }
 
-    describe 'response' do
-      it 'is an array of three items' do
-        expect(subject.size).to eq 3
+    let(:request)     { double(ActiveRequest) }
+    let(:response)    { double(Response) }
+    let(:router)      { double(Router) }
+    let(:controller)  { double(BaseController) }
+
+    before { allow(ActiveRequest).to receive(:new).and_return(request) }
+    before { allow_any_instance_of(Router).to receive(:route_for).and_return(route) }
+    before { allow(response).to receive(:to_rack).and_return([]) }
+
+    context 'when route does exist' do
+      let(:route)       { double(Route) }
+
+      before { allow(route).to receive(:controller).and_return(BaseController) }
+      before { allow(route).to receive(:action).and_return(:index) }
+      before { allow(BaseController).to receive(:new).and_return(controller) }
+      before { allow(controller).to receive(:send).and_return(response) }
+
+      it 'returns a controller rack response' do
+        subject
+        expect(controller).to have_received(:send)
+        expect(response).to have_received(:to_rack)
       end
+    end
 
-      it 'first parameter is HTTP code response' do
-        expect(Integer(subject.first)).to be > 0
-      end
+    context 'when route does not exist' do
+      let(:route)       { nil }
 
-      it 'second parameter is a hash with header information' do
-        expect(subject[1]).to be_instance_of(Hash)
-        expect(subject[1]).to include({'Content-Type' => 'application/json'})
-      end
+      before { allow(Response).to receive(:not_found).and_return(response) }
 
-      it 'third parameter is a array with the response (String)' do
-        expect(subject.last).to be_instance_of(Array)
-        expect(subject.last.last).to be_instance_of(String)
+      it 'returns a not found rack response' do
+        subject
+        expect(Response).to have_received(:not_found)
+        expect(response).to have_received(:to_rack)
       end
     end
   end
+
 end
