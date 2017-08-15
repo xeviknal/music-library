@@ -10,7 +10,16 @@ describe BaseController do
   it { is_expected.to respond_to(:params) }
 
   describe :render do
-    subject { controller.send(:render, object) }
+    subject { controller.send(:render, object, options) }
+    let(:options) { {} }
+
+    context 'when status is present in options' do
+      let(:object)  { ['Name has already been taken'] }
+      let(:options) { { status: 500 } }
+
+      it { expect(subject.status_code).to eq 500 }
+      it { expect(subject.body).to eq object.to_json }
+    end
 
     context 'when object to render is nil' do
       let(:object) { nil }

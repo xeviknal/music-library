@@ -49,7 +49,7 @@ class BaseController
 
   def build_response(body, options)
     response = Response.new
-    response.status_code  = 200
+    response.status_code  = options.fetch(:status, 200)
     response.body         = body
 
     response
