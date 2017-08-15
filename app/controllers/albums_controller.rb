@@ -9,7 +9,7 @@ class AlbumsController < BaseController
     if album.save
       render_success
     else
-      render album.errors.full_messages
+      render album.errors.full_messages, status: 500
     end
   end
 
