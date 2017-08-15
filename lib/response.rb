@@ -17,4 +17,13 @@ class Response
 
     response
   end
+
+  def self.empty
+    response = self.new
+    response.status_code  = 501
+    response.header       = { 'Content-Type' => 'text/html' }
+    response.body   = '<html><body><h1>Couldn\'t fulfil the request</h1></body></html>'
+
+    response
+  end
 end

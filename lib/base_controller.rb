@@ -11,15 +11,17 @@ class BaseController
   def render(object, options = {})
     # options[:serializer] => object is a single object
     # options[:each_serializer] => object is a collection of objects
-    return if object.nil?
+    return Response.empty if object.nil?
 
-    if options[:serializer]
+    body = if options[:serializer]
       render_single object, options.fetch(:serializer)
     elsif options[:each_serializer]
       render_collection object, options.fetch(:each_serializer)
     else
       render_plain object
     end
+
+    build_response(body, options)
   end
 
   private
@@ -36,5 +38,13 @@ class BaseController
     collection.map do |item|
       render_single(item, serializer)
     end
+  end
+
+  def build_response(body, options)
+    response = Response.new
+    response.status_code  = 200
+    response.body         = body
+
+    response
   end
 end

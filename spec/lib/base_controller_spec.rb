@@ -16,15 +16,29 @@ describe BaseController do
       let(:object) { nil }
       let(:options) { { serializer: TestSerializer } }
 
-      it { is_expected.to be_nil }
+      it { expect(subject.status_code).to eq Response.empty.status_code }
+      it { expect(subject.body).to eq Response.empty.body }
+      it { expect(subject.header).to eq Response.empty.header }
     end
 
     context 'when no serializer is provided' do
       let(:object) { [1,2,3] }
       let(:options) { { } }
 
-      it 'return the json representation of the input object' do
-        is_expected.to eq '[1,2,3]'
+      it 'returns a response object' do
+        is_expected.to be_instance_of(Response)
+      end
+
+      it 'returns a response object with status code to 200' do
+        expect(subject.status_code).to eq 200
+      end
+
+      it 'returns a response object with header with JSON MIME content-type' do
+        expect(subject.header).to eq({ 'Content-Type' => 'application/json' })
+      end
+
+      it 'returns a response object with the json representation of the input object' do
+        expect(subject.body).to eq '[1,2,3]'
       end
     end
 
@@ -36,7 +50,19 @@ describe BaseController do
       before { allow(TestSerializer).to receive(:new).and_return(serializer) }
       before { allow(serializer).to receive(:to_json) }
 
-      it 'returns the json representation of serializer class' do
+      it 'returns a response object' do
+        is_expected.to be_instance_of(Response)
+      end
+
+      it 'returns a response object with status code to 200' do
+        expect(subject.status_code).to eq 200
+      end
+
+      it 'returns a response object with header with JSON MIME content-type' do
+        expect(subject.header).to eq({ 'Content-Type' => 'application/json' })
+      end
+
+      it 'returns a response object with the json representation of SerializerClass' do
         subject
 
         expect(TestSerializer).to have_received(:new)
@@ -54,12 +80,25 @@ describe BaseController do
       before { allow(TestSerializer).to receive(:new).and_return(serializer) }
       before { allow(serializer).to receive(:to_json) }
 
-      it 'returns the json representation of SerializerClass' do
+      it 'returns a response object' do
+        is_expected.to be_instance_of(Response)
+      end
+
+      it 'returns a response object with status code to 200' do
+        expect(subject.status_code).to eq 200
+      end
+
+      it 'returns a response object with header with JSON MIME content-type' do
+        expect(subject.header).to eq({ 'Content-Type' => 'application/json' })
+      end
+
+      it 'returns a response object with the json representation of SerializerClass' do
         subject
 
         expect(TestSerializer).to have_received(:new).exactly(5).times
         expect(serializer).to have_received(:to_json).exactly(5).times
       end
+
     end
   end
 end

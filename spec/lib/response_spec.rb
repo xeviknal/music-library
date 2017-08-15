@@ -49,4 +49,20 @@ describe Response do
       expect(subject.body).to start_with '<html>'
     end
   end
+
+  describe '.empty' do
+    subject { Response.empty }
+
+    it 'status_code is 404' do
+      expect(subject.status_code).to eq 501
+    end
+
+    it 'header is a hash with content-type as html' do
+      expect(subject.header).to eq({ 'Content-Type' => 'text/html' })
+    end
+
+    it 'body is a string html formatted' do
+      expect(subject.body).to start_with '<html>'
+    end
+  end
 end
