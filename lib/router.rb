@@ -17,12 +17,11 @@ class Router
   end
 
   def route_for(request)
-    route = routes.detect do |method, routes|
-      method.to_sym == request.method &&
-        routes.find { |path, _| path == request.path }
+    route = routes[request.method].detect do |path, _|
+      path == request.path
     end
 
-    Route.new(*route.last.last) if route
+    Route.new(*route) if route
   end
 
   METHODS.each do |method|
