@@ -3,10 +3,20 @@ class AlbumsController < BaseController
     render Album.all
   end
 
-  def destroy
-    @album = Album.find params[:id]
+  def create
+    album = Album.new(params)
 
-    if @album.destroy
+    if album.save
+      render_success
+    else
+      render album.errors.full_messages
+    end
+  end
+
+  def destroy
+    album = Album.find params[:id]
+
+    if album.destroy
       render_success
     else
       render_failure
