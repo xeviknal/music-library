@@ -9,34 +9,33 @@ class BaseController
   protected
 
   def render(object, options = {})
-    # options[:serializer] => object is a single object
-    # options[:each_serializer] => object is a collection of objects
     return Response.empty if object.nil?
 
-    body = if options[:serializer]
-      render_single object, options.fetch(:serializer)
-    elsif options[:each_serializer]
-      render_collection object, options.fetch(:each_serializer)
-    else
-      render_plain object
-    end
-
+    body = serialize(object, options)
     build_response(body, options)
   end
 
   private
 
+  def serialize(object, options)
+    if object.respond_to? :to_json
+      render_single object, options
+    else
+      render_plain object
+    end
+  end
+
   def render_plain(object)
     JSON.generate(object)
   end
 
-  def render_single(object, serializer)
-    serializer.new(object).to_json
+  def render_single(object, options)
+    object.to_json
   end
 
-  def render_collection(collection, serializer)
+  def render_collection(collection, options)
     collection.map do |item|
-      render_single(item, serializer)
+      serialize(item, options)
     end
   end
 

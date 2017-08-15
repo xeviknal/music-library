@@ -1,2 +1,0 @@
-class TestSerializer
-end
