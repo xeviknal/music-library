@@ -53,7 +53,7 @@ describe Response do
   describe '.empty' do
     subject { Response.empty }
 
-    it 'status_code is 404' do
+    it 'status_code is 501' do
       expect(subject.status_code).to eq 501
     end
 
@@ -63,6 +63,38 @@ describe Response do
 
     it 'body is a string html formatted' do
       expect(subject.body).to start_with '<html>'
+    end
+  end
+
+  describe '.success' do
+    subject { Response.success }
+
+    it 'status_code is 200' do
+      expect(subject.status_code).to eq 200
+    end
+
+    it 'header is a hash with content-type as json' do
+      expect(subject.header).to eq({ 'Content-Type' => 'application/json' })
+    end
+
+    it 'body is an empty string' do
+      expect(subject.body).to eq ''
+    end
+  end
+
+  describe '.failure' do
+    subject { Response.failure }
+
+    it 'status_code is 500' do
+      expect(subject.status_code).to eq 500
+    end
+
+    it 'header is a hash with content-type as json' do
+      expect(subject.header).to eq({ 'Content-Type' => 'application/json' })
+    end
+
+    it 'body is an empty string' do
+      expect(subject.body).to eq ''
     end
   end
 end

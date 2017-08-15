@@ -15,6 +15,14 @@ class BaseController
     build_response(body, options)
   end
 
+  def render_success
+    Response.success
+  end
+
+  def render_failure
+    Response.failure
+  end
+
   private
 
   def serialize(object, options)

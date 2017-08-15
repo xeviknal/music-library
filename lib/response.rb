@@ -26,4 +26,20 @@ class Response
 
     response
   end
+
+  def self.success
+    response = self.new
+    response.status_code  = 200
+    response.body   = ''
+
+    response
+  end
+
+  def self.failure
+    response = self.new
+    response.status_code  = 500
+    response.body   = ''
+
+    response
+  end
 end

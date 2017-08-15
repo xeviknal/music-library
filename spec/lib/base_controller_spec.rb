@@ -103,4 +103,26 @@ describe BaseController do
       end
     end
   end
+
+  describe '.render_success' do
+    subject { controller.send(:render_success) }
+
+    before { allow(Response).to receive(:success) }
+
+    it 'returns a response' do
+      subject
+      expect(Response).to have_received(:success)
+    end
+  end
+
+  describe '.render_failure' do
+    subject { controller.send(:render_failure) }
+
+    before { allow(Response).to receive(:failure) }
+
+    it 'returns a response' do
+      subject
+      expect(Response).to have_received(:failure)
+    end
+  end
 end
