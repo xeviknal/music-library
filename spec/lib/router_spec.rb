@@ -27,7 +27,7 @@ describe Router do
         allow(router).to receive(:routes).
           and_return( { get: [], post: [], delete: [] })
 
-        router.routes[:post] << [path, { to: 'album#index' }]
+        router.routes[:post] << [path, { to: 'albums#index' }]
       end
 
       it { is_expected.to be_nil }
@@ -36,7 +36,7 @@ describe Router do
     context 'when request\'s method match with url' do
       before do
         allow(router).to receive(:routes).
-          and_return( { method => [[path, { to: 'album#index' }]] })
+          and_return( { method => [[path, { to: 'albums#index' }]] })
       end
 
       it { is_expected.to be_instance_of(Route) }
