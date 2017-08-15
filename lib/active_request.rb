@@ -32,7 +32,7 @@ class ActiveRequest
   end
 
   def query_string
-    env['query_string']
+    env['QUERY_STRING']
   end
 
   def parse_query_string

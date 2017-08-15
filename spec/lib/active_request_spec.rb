@@ -8,13 +8,13 @@ describe ActiveRequest do
     subject { request.params }
 
     context 'when there is no params' do
-      let(:environment) { {'query_string': ''} }
+      let(:environment) { {'QUERY_STRING': ''} }
 
       it { is_expected.to eq Hash.new }
     end
 
     context 'when there are params' do
-      let(:environment) { {'query_string': 'param1=2&param2=1'} }
+      let(:environment) { {'QUERY_STRING': 'param1=2&param2=1'} }
 
       it 'has param1 with 2 as a value' do
         expect(subject[:param1]).to eq 2
