@@ -1,6 +1,12 @@
 class TracksController < BaseController
   def index
-    render Track.all
+    @tracks = if params[:id]
+      Track.where(album_id: params[:id])
+    else
+      Track.all
+    end
+
+    render @tracks
   end
 
   def create
