@@ -11,7 +11,7 @@ class AlbumsController < BaseController
     album = Album.new(params)
 
     if album.save
-      render_success
+      render album
     else
       render album.errors.full_messages, status: 500
     end

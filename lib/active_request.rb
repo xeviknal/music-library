@@ -11,6 +11,8 @@ class ActiveRequest
     @params ||= begin
       if has_params?
         parse_query_string
+      elsif has_body?
+        parse_body_json
       else
         Hash.new
       end
@@ -26,6 +28,18 @@ class ActiveRequest
   end
 
   private
+
+  def has_body?
+    !body_input.nil? && !body_input.empty?
+  end
+
+  def body_input
+    @request_body ||= env['rack.input']&.read
+  end
+
+  def parse_body_json
+    JSON.parse(body_input).with_indifferent_access
+  end
 
   def has_params?
     !query_string.nil? && !query_string.empty?

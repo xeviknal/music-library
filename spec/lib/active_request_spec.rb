@@ -28,6 +28,19 @@ describe ActiveRequest do
         expect(subject).to be_instance_of(ActiveSupport::HashWithIndifferentAccess)
       end
     end
+
+    context 'when there are params in body' do
+      let(:environment) { {'rack.input': body } }
+      let(:body) { StringIO.new('{"name": "Elliot"}') }
+
+      it 'has name with Elliot as a value' do
+        expect(subject[:name]).to eq 'Elliot'
+      end
+
+      it 'can be accessed by string or symbols' do
+        expect(subject).to be_instance_of(ActiveSupport::HashWithIndifferentAccess)
+      end
+    end
   end
 
   describe '.method' do
