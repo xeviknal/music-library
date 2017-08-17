@@ -54,4 +54,20 @@ class Response
 
     response
   end
+
+  def self.preflight
+    response = self.new
+    response.status_code  = 200
+    response.body         = ''
+    response.header       = {
+      'Content-Type' => 'application/json',
+      'Access-Control-Allow-Origin'=>'*',
+      'Access-Control-Request-Method'=>'*',
+      'Access-Control-Allow-Methods' => 'POST, GET, DELETE',
+      'Access-Control-Allow-Headers' => 'Content-Type, Access-Control-Allow-Headers, Access-Control-Allow-Methods, Authorization, X-Requested-With'
+    }
+
+    response
+  end
+
 end

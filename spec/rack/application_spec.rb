@@ -42,10 +42,24 @@ describe MusicLibrary::Application do
       let(:route)       { nil }
 
       before { allow(Response).to receive(:not_found).and_return(response) }
+      before { allow(request).to receive(:preflight?).and_return(false) }
 
       it 'returns a not found rack response' do
         subject
         expect(Response).to have_received(:not_found)
+        expect(response).to have_received(:to_rack)
+      end
+    end
+
+    context 'when incoming request is a preflight' do
+      let(:route) { nil }
+
+      before { allow(Response).to receive(:preflight).and_return(response) }
+      before { allow(request).to receive(:preflight?).and_return(true) }
+
+      it 'returns a not found rack response' do
+        subject
+        expect(Response).to have_received(:preflight)
         expect(response).to have_received(:to_rack)
       end
     end

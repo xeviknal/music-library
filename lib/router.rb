@@ -3,10 +3,11 @@ require_relative('route')
 class Router
   attr_accessor :routes
 
-  GET    = :get
-  POST   = :post
-  DELETE = :delete
-  METHODS = [GET, POST, DELETE]
+  GET     = :get
+  POST    = :post
+  DELETE  = :delete
+  OPTIONS = :options
+  METHODS = [GET, POST, DELETE, OPTIONS]
 
   def initialize
     empty_routes

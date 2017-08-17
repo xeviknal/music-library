@@ -27,6 +27,10 @@ class ActiveRequest
     @path ||= env['PATH_INFO']
   end
 
+  def preflight?
+    method == Router::OPTIONS
+  end
+
   private
 
   def has_body?

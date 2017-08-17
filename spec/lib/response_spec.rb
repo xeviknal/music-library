@@ -101,4 +101,26 @@ describe Response do
       expect(subject.body).to eq ''
     end
   end
+
+  describe '.preflight' do
+    subject { Response.preflight }
+
+    it 'status_code is 200' do
+      expect(subject.status_code).to eq 200
+    end
+
+    it 'header is a hash with content-type as json' do
+      expect(subject.header).to eq({
+        'Content-Type' => 'application/json',
+        'Access-Control-Allow-Origin'=>'*',
+        'Access-Control-Request-Method'=>'*',
+        'Access-Control-Allow-Methods' => 'POST, GET, DELETE',
+        'Access-Control-Allow-Headers' => 'Content-Type, Access-Control-Allow-Headers, Access-Control-Allow-Methods, Authorization, X-Requested-With'
+      })
+    end
+
+    it 'body is an empty string' do
+      expect(subject.body).to eq ''
+    end
+  end
 end

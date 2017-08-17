@@ -22,6 +22,8 @@ module MusicLibrary
       if route
         controller  = route.controller.new(request)
         controller.send(route.action)
+      elsif request.preflight?
+        Response.preflight
       else
         Response.not_found
       end.to_rack

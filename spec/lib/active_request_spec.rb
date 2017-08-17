@@ -62,4 +62,18 @@ describe ActiveRequest do
 
     it { is_expected.to eq '/an/example/path' }
   end
+
+  describe '.preflight?' do
+    subject { request.preflight? }
+
+    context 'when request method is OPTIONS' do
+      let(:environment) { { 'REQUEST_METHOD': 'OPTIONS' } }
+      it { is_expected.to eq true }
+    end
+
+    context 'when request method is not OPTIONS' do
+      let(:environment) { { 'REQUEST_METHOD': 'DELETE' } }
+      it { is_expected.to eq false }
+    end
+  end
 end
