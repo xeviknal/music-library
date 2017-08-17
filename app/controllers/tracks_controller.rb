@@ -7,7 +7,7 @@ class TracksController < BaseController
     track = Track.new(params)
 
     if track.save
-      render_success
+      render track
     else
       render track.errors.full_messages, status: 500
     end
