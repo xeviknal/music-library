@@ -1,5 +1,7 @@
 require 'pry'
 
+ENV['MUSIC_ENV'] ||= 'test'
+
 require './config/environment'
 MusicLibraryApp = MusicLibrary::Application.new
 

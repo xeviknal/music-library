@@ -7,10 +7,11 @@ Dir['./app/models/*.rb'].each { |f| require f }
 
 module MusicLibrary
   class Application
-    attr_reader :router
+    attr_accessor :router, :environment
 
     def initialize
-      @router = Router.new
+      self.environment = ENV['MUSIC_ENV']
+      self.router = Router.new
       establish_connection
     end
 
@@ -29,7 +30,7 @@ module MusicLibrary
     private
 
     def establish_connection
-      database_config = YAML.load_file("./config/database.yml")
+      database_config = YAML.load_file("./config/database.yml")[environment]
       ActiveRecord::Base.establish_connection(
         adapter:  database_config["adapter"],
         database: "db/#{database_config["database"]}.sqlite3",

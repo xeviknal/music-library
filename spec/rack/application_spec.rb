@@ -6,6 +6,11 @@ describe MusicLibrary::Application do
 
   it { is_expected.to respond_to(:call).with(1).argument }
 
+  describe :new do
+    it { expect(application.router).to be_instance_of(Router) }
+    it { expect(application.environment).to eq 'test' }
+  end
+
   describe :call do
     subject { application.call({}) }
 
