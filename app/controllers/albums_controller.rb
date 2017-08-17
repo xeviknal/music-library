@@ -3,6 +3,10 @@ class AlbumsController < BaseController
     render Album.all
   end
 
+  def show
+    render Album.find params[:id]
+  end
+
   def create
     album = Album.new(params)
 
