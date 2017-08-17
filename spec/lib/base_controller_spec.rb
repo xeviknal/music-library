@@ -41,7 +41,8 @@ describe BaseController do
       end
 
       it 'returns a response object with header with JSON MIME content-type' do
-        expect(subject.header).to eq({ 'Content-Type' => 'application/json' })
+        expect(subject.header).to eq({ 'Content-Type' => 'application/json',
+         "Access-Control-Allow-Origin"=>"*", "Access-Control-Request-Method"=>"*"})
       end
 
       it 'returns a response object with the json representation of the input object' do
@@ -61,7 +62,8 @@ describe BaseController do
       end
 
       it 'returns a response object with header with JSON MIME content-type' do
-        expect(subject.header).to eq({ 'Content-Type' => 'application/json' })
+        expect(subject.header).to eq({ 'Content-Type' => 'application/json',
+         "Access-Control-Allow-Origin"=>"*", "Access-Control-Request-Method"=>"*"})
       end
 
       it 'returns a response object with the json representation of the input object' do
@@ -81,7 +83,8 @@ describe BaseController do
       end
 
       it 'returns a response object with header with JSON MIME content-type' do
-        expect(subject.header).to eq({ 'Content-Type' => 'application/json' })
+        expect(subject.header).to eq({ 'Content-Type' => 'application/json',
+         "Access-Control-Allow-Origin"=>"*", "Access-Control-Request-Method"=>"*"})
       end
 
       it 'returns a response object with the json' do
@@ -103,7 +106,8 @@ describe BaseController do
       end
 
       it 'returns a response object with header with JSON MIME content-type' do
-        expect(subject.header).to eq({ 'Content-Type' => 'application/json' })
+        expect(subject.header).to eq({ 'Content-Type' => 'application/json',
+         "Access-Control-Allow-Origin"=>"*", "Access-Control-Request-Method"=>"*"})
       end
 
       it 'returns a response object with the json' do

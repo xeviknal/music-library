@@ -42,7 +42,8 @@ describe Response do
     end
 
     it 'header is a hash with content-type as html' do
-      expect(subject.header).to eq({ 'Content-Type' => 'text/html' })
+      expect(subject.header).to eq({ 'Content-Type' => 'text/html',
+        "Access-Control-Allow-Origin"=>"*", "Access-Control-Request-Method"=>"*" })
     end
 
     it 'body is a string html formatted' do
@@ -58,7 +59,8 @@ describe Response do
     end
 
     it 'header is a hash with content-type as html' do
-      expect(subject.header).to eq({ 'Content-Type' => 'text/html' })
+      expect(subject.header).to eq({ 'Content-Type' => 'text/html',
+        "Access-Control-Allow-Origin"=>"*", "Access-Control-Request-Method"=>"*" })
     end
 
     it 'body is a string html formatted' do
@@ -74,7 +76,8 @@ describe Response do
     end
 
     it 'header is a hash with content-type as json' do
-      expect(subject.header).to eq({ 'Content-Type' => 'application/json' })
+      expect(subject.header).to eq({ 'Content-Type' => 'application/json',
+        "Access-Control-Allow-Origin"=>"*", "Access-Control-Request-Method"=>"*" })
     end
 
     it 'body is an empty string' do
@@ -90,7 +93,8 @@ describe Response do
     end
 
     it 'header is a hash with content-type as json' do
-      expect(subject.header).to eq({ 'Content-Type' => 'application/json' })
+      expect(subject.header).to eq({ 'Content-Type' => 'application/json',
+        "Access-Control-Allow-Origin"=>"*", "Access-Control-Request-Method"=>"*" })
     end
 
     it 'body is an empty string' do
