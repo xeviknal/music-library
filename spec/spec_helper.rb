@@ -3,7 +3,7 @@ require 'database_cleaner'
 
 ENV['MUSIC_ENV'] ||= 'test'
 
-require './config/environment'
+require './config/application'
 MusicLibraryApp = MusicLibrary::Application.new
 
 Dir['./config/*.rb'].each { |f| require f }

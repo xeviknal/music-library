@@ -1,5 +1,5 @@
 require 'rack'
-require_relative 'config/environment'
+require_relative 'config/application'
 
 ENV['MUSIC_ENV'] ||= 'development'
 
