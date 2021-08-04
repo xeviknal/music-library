@@ -2,6 +2,8 @@
 This repository holds the API to manage Albums and Tracks for a single user.
 The `music-library-ui` repository has the front-end consumer app which lets users interact with this API.
 
+*Note*: The goal of this project was to show my skills of Ruby outside the Rails framework (or using only few dependencies from it).
+
 ## Installation
 In order to install the Music Library App, it is necessary to have installed `ruby` (tested in version 2.3.4)  and `bundler`.
 
